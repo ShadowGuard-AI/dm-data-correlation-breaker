@@ -13,7 +13,7 @@ Identifies and removes subtle correlations between seemingly unrelated data poin
 - `-h`: Show help message and exit
 - `--input`: Path to the input CSV file.
 - `--columns`: Comma-separated list of column names to process.
-- `--error-rate`: No description provided
+- `--error-rate`: Probability (0-1) of introducing an error in a data point. Default: 0.01
 - `--output`: Path to the output CSV file. Default: output.csv
 - `--seed`: Seed for the random number generator to ensure reproducibility.
 
