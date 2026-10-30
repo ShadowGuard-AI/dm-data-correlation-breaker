@@ -65,7 +65,10 @@ def introduce_error(data, error_rate, faker, seed):
     Returns:
         list: A list of data points with errors introduced.
     """
-    random.seed(seed)
+    # No reseeding in here. This runs once per column, and restarting the
+    # sequence on every call picked the same row positions for corruption
+    # in every column, which is itself a cross-column pattern, the thing
+    # this tool exists to break. main seeds once before the column loop.
     modified_data = []
     for item in data:
         if random.random() < error_rate:
@@ -126,9 +129,13 @@ def main():
         fake = Faker()
         if seed is not None:
             Faker.seed(seed) # Seed Faker for reproducibility
+            random.seed(seed) # Seeded once for the whole run; see introduce_error
 
         for col in columns_to_process:
             try:
+                # astype(str) means every value arrives as a string, so the
+                # numeric noise branch inside introduce_error never runs on
+                # this path; numbers are replaced with fake words too.
                 df[col] = introduce_error(df[col].astype(str).tolist(), error_rate, fake, seed) # Convert to string to handle various types
             except Exception as e:
                  logging.error(f"Error processing column '{col}': {e}")
