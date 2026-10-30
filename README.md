@@ -1,3 +1,5 @@
+![Banner](banner.png)
+
 # dm-data-correlation-breaker
 Identifies and removes subtle correlations between seemingly unrelated data points that could lead to re-identification of masked data. It focuses on finding and breaking these hidden links, for example, by injecting carefully chosen errors or variations. - Focused on Tools designed to generate or mask sensitive data with realistic-looking but meaningless values
 
