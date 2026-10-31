@@ -17,5 +17,10 @@ Identifies and removes subtle correlations between seemingly unrelated data poin
 - `--output`: Path to the output CSV file. Default: output.csv
 - `--seed`: Seed for the random number generator to ensure reproducibility.
 
+## Behavior notes
+- The output file may not be the input file. If the resolved output path is the input file, by the same spelling, a `./` alias, or a symlink, the run refuses at exit 1 before anything is written and the input is left untouched.
+- Values keep their type. A value in a numeric column gets small numeric noise added and stays a number in the output. A value in a text column is replaced with a fake word.
+- The same seed and the same input produce byte-identical output.
+
 ## License
 Copyright (c) ShadowGuardAI

@@ -2,6 +2,7 @@ import argparse
 import logging
 import random
 import sys
+from pathlib import Path
 from faker import Faker
 
 # Configure logging
@@ -57,7 +58,9 @@ def introduce_error(data, error_rate, faker, seed):
     Introduces errors into the data to break correlations.
 
     Args:
-        data (list): A list of data points (strings).
+        data (list): A list of data points, in their original types.
+            Numbers take the numeric noise branch and stay numbers;
+            strings are replaced with a fake word.
         error_rate (float): The probability of introducing an error.
         faker (Faker): A Faker instance for generating fake data.
         seed (int): Seed for reproducibility.
@@ -105,6 +108,13 @@ def main():
         logging.error("Error rate must be between 0 and 1.")
         sys.exit(1)
 
+    # The output may not name the input file, in any spelling. Resolved
+    # paths are compared, so a ./ alias or a symlink to the input is
+    # caught as well as the same string. Refuse before any write.
+    if Path(output_file).resolve() == Path(input_file).resolve():
+        logging.error("Output file must not be the input file. Choose a different output path.")
+        sys.exit(1)
+
     try:
         import pandas as pd  # Import pandas here to handle import error gracefully
 
@@ -133,10 +143,12 @@ def main():
 
         for col in columns_to_process:
             try:
-                # astype(str) means every value arrives as a string, so the
-                # numeric noise branch inside introduce_error never runs on
-                # this path; numbers are replaced with fake words too.
-                df[col] = introduce_error(df[col].astype(str).tolist(), error_rate, fake, seed) # Convert to string to handle various types
+                # Pass the values in their original types. Converting to
+                # str first would send every value down the fake word
+                # branch, so a numeric column came out holding words and
+                # lost its type. Typed values let numeric columns take
+                # the numeric noise branch and stay numeric.
+                df[col] = introduce_error(df[col].tolist(), error_rate, fake, seed)
             except Exception as e:
                  logging.error(f"Error processing column '{col}': {e}")
                  sys.exit(1)
