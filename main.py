@@ -80,6 +80,11 @@ def introduce_error(data, error_rate, faker, seed):
             if isinstance(item, str):  # Ensure the item is a string
                 modified_data.append(faker.word())  # Replace with a random word
             elif isinstance(item, (int, float)):
+                 # The noise band is proportional to the value, so a
+                 # zero is never changed by its error draw: ten percent
+                 # of zero is zero. Booleans also land on this branch,
+                 # because bool is an int subclass in Python, and come
+                 # back as floats rather than True or False.
                  modified_data.append(item + random.uniform(-0.1 * item, 0.1 * item))  # Add a small random noise
             else:
                 modified_data.append(faker.word()) # Default to random word if type is unknown
@@ -98,6 +103,10 @@ def main():
     args = parser.parse_args()
 
     input_file = args.input
+    # No stripping after the split: "name, city" looks for a column
+    # literally named " city" and the run exits on it below. The
+    # example in the help text uses no space after the comma, and
+    # that exact shape is what the parser expects.
     columns_to_process = args.columns.split(",")
     error_rate = args.error_rate
     output_file = args.output
