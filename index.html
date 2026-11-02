@@ -1,166 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dm Data Correlation Breaker: what it is, how it runs, where it stops</title>
-<meta name="description" content="Dm Data Correlation Breaker is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.">
-<style>
-:root {
-  --bg: #121418; --panel: #1c2028; --ink: #e8ecf0;
-  --mut: #252b36;
-  --acc: #5cc8e0; --acc2: #f0a05c;
-  --line: #1c2028;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: ' Gill Sans', 'Segoe UI', sans-serif; line-height: 1.55; }
-code, pre, .mono { font-family: 'SF Mono', monospace; }
-a { color: var(--acc2); }
-.hero { padding: 3rem 6vw 1rem; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; }
-.logo { width: 92px; height: 92px; border-radius: 18px;
-  border: 1px solid var(--line); }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.1em; }
-h2 { border-bottom: 2px solid var(--acc); padding-bottom: 0.2em;
-  margin-top: 2em; }
-.lede { font-size: 1.15rem; max-width: 62ch; }
-main { padding: 0 6vw 3rem; max-width: 1180px; margin: 0 auto; }
-.grid { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.card { background: var(--panel); border: 1px solid var(--line);
-  border-radius: 12px; padding: 1rem 1.2rem; }
-.card.pop { animation: rise 0.7s ease both; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; } }
-pre.code { background: #101014; color: #e8e6df; padding: 1rem 1.2rem;
-  border-radius: 12px; overflow-x: auto; font-size: 0.86rem;
-  border-left: 5px solid var(--acc); }
-table { border-collapse: collapse; width: 100%; }
-td, th { border-bottom: 1px solid var(--line); padding: 0.45rem 0.6rem;
-  text-align: left; }
-.shots { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shots img { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; background: #f4f1e8; }
-footer { padding: 2rem 6vw; border-top: 1px solid var(--line);
-  color: var(--mut); }
-.rail { display: flex; gap: 1.2rem; align-items: flex-start; }
-.rail nav { position: sticky; top: 1rem; min-width: 180px; }
-@media (max-width: 760px) { .rail { flex-direction: column; }
-  .rail nav { position: static; } }
-@media (prefers-reduced-motion: reduce) {
-  .card.pop { animation: none; } * { scroll-behavior: auto; } }
-</style>
-</head>
-<body class="layout-grid">
-<!-- This page exists for dm-data-correlation-breaker alone: the layout (console-grid),
-     the colors, and the type were picked for this project, not
-     shared with the other project pages. The code block below is
-     copied from the file it names, line for line. If it looks
-     plain, that is because the project is plain, and I would
-     rather the page match the project than dress it up. The one
-     thing I will not do here is oversell: what this project does
-     not do is stated on the page, not hidden from it. -->
-<header class="hero">
-  <img class="logo" src="assets/logo.png" alt="Dm Data Correlation Breaker logo">
-  <img class="banner" src="assets/banner.png" alt="">
-  <h1>Dm Data Correlation Breaker</h1>
-  <p class="mono"><a href="https://github.com/ShadowGuard-AI/dm-data-correlation-breaker">github.com/ShadowGuard-AI/dm-data-correlation-breaker</a></p>
-</header>
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>dm-data-correlation-breaker: The Night Sort at the Railway Mail Car</title>
+<style>@font-face{font-family:Disp;src:url("fonts/BungeeOutline.ttf")}@font-face{font-family:Text;src:url("fonts/Archivo.ttf")}
+body{background:#ffffff;font-family:Text,sans-serif;color:#191919;margin:0}main{max-width:920px;margin:0 auto;padding:28px}
+h1,h2,h3{font-family:Disp,serif;color:#2e4a6b}section{background:#f0e4cd;padding:18px 22px;margin:16px 0;border:3px solid #8a6b42;position:relative}
+section::before{content:"BOOKPLATE";display:block;background:#ffffff;border-bottom:2px solid #2e4a6b;color:#2e4a6b;font-size:11px;letter-spacing:2px;padding:2px 6px;margin:-18px -22px 12px}
+img{max-width:100%}button{background:#ece4cf;color:#16161a;border:2px solid #16161a;border-radius:18px 18px 6px 6px;padding:12px 20px;margin:4px;font-family:Disp,serif;box-shadow:0 2px 0 #8a6b42}
+button:hover{filter:brightness(0.92)}button:active{transform:translateY(1px)}button:focus{outline:4px double #2e4a6b}
+a{color:#2e4a6b;text-decoration:none}a::before{content:"";display:inline-block;width:11px;height:11px;border:2px solid #2e4a6b;border-radius:50%;margin-right:6px;vertical-align:-1px}a:hover{color:#16161a}
+.poster{font-size:30px;line-height:1.35;font-family:Disp,serif;color:#2e4a6b}
+pre{white-space:pre-wrap;font-family:Text,sans-serif;background:#ffffff;padding:14px;border:1px solid #8a6b42}code{font-family:Text,sans-serif}
+table{border-collapse:collapse}td,th{border:1px solid #8a6b42;padding:6px 10px;background:#ffffff;text-align:left}</style></head><body><main>
+<img src="intro-banner.png" alt="Introduction banner: a mail hook hanging in lamplight inside a night mail car, no name anywhere">
+<h1>dm-data-correlation-breaker: The Night Sort at the Railway Mail Car</h1>
+<p>dm-data-correlation-breaker: The Night Sort at the Railway Mail Car names itself in that form throughout this page. The page is laid out as a sorting case: white ground, pale oak panels, headings in carbon blue, and one plate per pigeonhole row. The mail hook marks each plate the way it marks chapters in the README.</p>
+<img src="logo.png" alt="Logo: a heavy mail hook in carbon blue with an oak hanging ring"><img src="banner.png" alt="Wordmark banner: the whole mail car, the name on the side board of the sorting case">
+<img src="scene.svg" alt="Animated scene in three bands: slugs sliding, stamps thumping, the hook swaying">
+<div><button type="button">Break the Links</button><button type="button">Show the Bench Notes</button></div>
+<h3>Links That Should Not Hold</h3><h3>Output Is Never Input</h3><h3>Numbers Stay Numbers</h3><h3>Same Seed, Same Bytes</h3>
+<section><h2>Plate one: mission</h2><p>Masked figures can still gossip about each other. Points nobody would connect in isolation drift in tandem, and tandem drift betrays. The program hunts those quiet couplings among apparent strangers and snaps them with planted errors or variations, after which the coupling carries no weight. It sits with kin that manufacture or mask sensitive data, believable at a glance and meaningless on inspection.</p></section>
+<section><h2>Plate two: acquisition</h2><p><code>git clone https://github.com/ShadowGuardAI/dm-data-correlation-breaker</code></p><p>Side note, flagged and uncorrected in place: the clone line above is reproduced to the letter from the README, and the organisation in it is spelled without a hyphen. The restored spelling carries a hyphen. The fault is itemised under Spelling faults in the paperwork in the generation record, and it is repaired nowhere on this page.</p></section>
+<section><h2>Plate three: controls</h2><p>Invocation shape: <code>./dm-data-correlation-breaker [params]</code>. Bare bones: program name, parameters, end of story. The dials follow in README sequence, one row each.</p><table>
+<tr><th>Dial</th><th>What it does</th></tr>
+<tr><td>-h</td><td>Show help message and exit. Help heads the list, mirroring print.</td></tr>
+<tr><td>--input</td><td>Path to the input CSV file.</td></tr>
+<tr><td>--columns</td><td>Comma-separated list of column names to process.</td></tr>
+<tr><td>--error-rate</td><td>Probability (0-1) of introducing an error in a data point. Default: 0.01</td></tr>
+<tr><td>--output</td><td>Path to the output CSV file. Default: output.csv</td></tr>
+<tr><td>--seed</td><td>Seed for the random number generator to ensure reproducibility.</td></tr></table>
+<p>No worked example is printed in the README, and none is invented here. No genuine column name, specimen row, or path from anyone's file appears anywhere on this page. The only filename quoted is output.csv, and only as the stated default of the output dial.</p></section>
+<section><h2>Plate four: the refusal</h2><p class="poster">Output is never input.</p><p>The outgoing file and the incoming file must differ. Resolve the outgoing path and land on the incoming one, by identical spelling, by a ./ alias, by a symlink, any road, and the run declines at exit 1 ahead of writing anything whatsoever. Detection happens ahead of any writing, and the incoming file emerges untouched, keeping every byte. The README frames this as a pledge, and this plate keeps it at poster size for that reason.</p></section>
+<section><h2>Plate five: kind preservation</h2><p>Columns keep their species across the journey, demonstrated with stand ins only. A stand in number, given a modest nudge of numeric noise, stays visibly a number: [stand in number] becomes [stand in number, noised]. A stand in word is swapped for an invented word: [stand in word] becomes [a different stand in word]. The plate shows species, never genuine data.</p></section>
+<section><h2>Plate six: the seed, plus a confession</h2><p>Same seed, same input, output identical down to the byte. Not similar. Identical, byte for byte. That much is promised loudly. Beside it, the honest gap: print offers no correlation yardstick and no threshold for what qualifies as a coupling worth snapping, and no rule for how a column earns a numeric or text classification. So this site advertises no detection score and fabricates no report layout.</p></section>
+<section><h2>Plate seven: rights</h2><p>Copyright (c) ShadowGuardAI</p><p>The line above is the README licence line as printed, fault and all: the organisation spelling there also lacks its hyphen, and it carries no year and no person. Adjacent and separate, the LICENSE particulars: the repository LICENSE holds the MIT License. Its holder is rendered as a pen name followed by the rest of the name shrunk to a solitary initial, plus the handle @Epsilon0xCell, dated 2025-2026. The initial stays shut, and the two versions stay on record with their discrepancy intact.</p></section>
+<section><h2>The preserved README record</h2><pre>![Banner](banner.png)
 
-<main>
-  <section class="rail">
-    <nav aria-label="on this page">
-      <p class="mono"><a href="#run">Run it</a><br>
-      <a href="#files">The files</a><br>
-      <a href="#sheets">The sheets</a><br>
-      <a href="https://github.com/ShadowGuard-AI/dm-data-correlation-breaker">The repo</a></p>
-    </nav>
-    <div>
-      <p class="lede">Dm Data Correlation Breaker is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.</p>
-      <div class="grid">
-        <div class="card pop"><h3>What it is</h3>
-          <p>Dm Data Correlation Breaker: 5 files, 181 counted
-          lines across Python 158, Markdown 21, Text 2. One job, done in the
-          open, in files you can read.</p></div>
-        <div class="card pop"><h3>The biggest piece</h3>
-          <p><code>main.py</code> carries the most
-          lines. If the project grows, that file is where the growth
-          lands first, for better or worse.</p></div>
-        <div class="card pop"><h3>The honest gap</h3>
-          <p>No test files yet. That is the honest gap, and the roadmap in the visuals folder says what the first one should cover.</p></div>
-      </div>
-      <section id="run">
-        <h2>Run it</h2>
-        <p>The repo README has the exact commands for this one. The
-        shape is the shape for most of my projects: clone it, read the
-        top file first so you know what will happen, then run it on
-        something you do not mind breaking.</p>
-        <p class="mono">$ git clone https://github.com/ShadowGuard-AI/dm-data-correlation-breaker.git<br>$ cd dm-data-correlation-breaker</p>
-      </section>
-      
-  <section aria-label="real code">
-    <h2>The code, as it sits in the repo</h2>
-    <p>From <code>main.py</code>, line 8 on. I did
-    not tidy it for the page. What you see is what the file has.</p>
-    <pre class="code"><code>logging.basicConfig(level=logging.INFO, format=&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;)
+# dm-data-correlation-breaker
+Identifies and removes subtle correlations between seemingly unrelated data points that could lead to re-identification of masked data. It focuses on finding and breaking these hidden links, for example, by injecting carefully chosen errors or variations. - Focused on Tools designed to generate or mask sensitive data with realistic-looking but meaningless values
 
-def setup_argparse():
-    &quot;&quot;&quot;
-    Sets up the argument parser for the command line interface.
-    &quot;&quot;&quot;
-    parser = argparse.ArgumentParser(
-        description=&quot;Identifies and removes subtle correlations between data points in a dataset to prevent re-identification of masked data.&quot;,
-        epilog=&quot;Example: python main.py --input data.csv --columns name,city --error-rate 0.05&quot;
-    )
+## Install
+`git clone https://github.com/ShadowGuardAI/dm-data-correlation-breaker`
 
-    parser.add_argument(
-        &quot;--input&quot;,
-        type=str,
-        required=True,
-        help=&quot;Path to the input CSV file.&quot;
-    )
+## Usage
+`./dm-data-correlation-breaker [params]`
 
-    parser.add_argument(
-        &quot;--columns&quot;,
-        type=str,
-        required=True,</code></pre>
-  </section>
-      <section id="files">
-        <h2>The files that matter</h2>
-        <table><tr><th>File</th><th>Lines</th></tr>
-        <tr><td><code>main.py</code></td><td>158</td></tr>
-        <tr><td><code>README.md</code></td><td>21</td></tr>
-        <tr><td><code>requirements.txt</code></td><td>2</td></tr>
-        <tr><td><code>banner.png</code></td><td>0</td></tr>
-        <tr><td><code>logo.png</code></td><td>0</td></tr>
-        </table>
-        <p>Names doing the work: <span class="mono">setup_argparse, introduce_error, main</span>.</p>
-      </section>
-      <section id="sheets">
-        <h2>Drawn by hand</h2>
-        <p>I sketch my projects on notebook paper so I have to
-        understand them well enough to draw them. The full set,
-        with the counts and how they were counted, is the
-        <a href="https://github.com/ShadowGuard-AI/dm-data-correlation-breaker/tree/main/dm-data-correlation-breaker-Visuals">dm-data-correlation-breaker-Visuals</a>
-        folder in the repo. Nothing is drawn over the binder holes.
-        That is a rule, not a style.</p>
-        <div class="shots">
-          <img src="assets/architecture.png" alt="Hand drawn architecture sheet for Dm Data Correlation Breaker">
-          <img src="assets/flowchart.png" alt="Hand drawn flowchart sheet for Dm Data Correlation Breaker">
-          <img src="assets/product-map.png" alt="Hand drawn product map sheet for Dm Data Correlation Breaker">
-        </div>
-      </section>
-    </div>
-  </section>
-</main>
-<footer>
-  <p>Dm Data Correlation Breaker is one of my projects. This page was written
-  from the repo itself on 2026-10-30: the counts are the
-  repo's counts, the code is the repo's code, and the gaps are the
-  repo's gaps.</p>
-</footer>
-</body>
-</html>
+## Parameters
+- `-h`: Show help message and exit
+- `--input`: Path to the input CSV file.
+- `--columns`: Comma-separated list of column names to process.
+- `--error-rate`: Probability (0-1) of introducing an error in a data point. Default: 0.01
+- `--output`: Path to the output CSV file. Default: output.csv
+- `--seed`: Seed for the random number generator to ensure reproducibility.
+
+## Behavior notes
+- The output file may not be the input file. If the resolved output path is the input file, by the same spelling, a `./` alias, or a symlink, the run refuses at exit 1 before anything is written and the input is left untouched.
+- Values keep their type. A value in a numeric column gets small numeric noise added and stays a number in the output. A value in a text column is replaced with a fake word.
+- The same seed and the same input produce byte-identical output.
+
+## License
+Copyright (c) ShadowGuardAI</pre></section>
+</main></body></html>

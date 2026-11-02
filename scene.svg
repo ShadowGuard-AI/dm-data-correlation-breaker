@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img" aria-label="The night sort in three bands: type slugs sliding along the back bench, date stamps thumping postmarks onto pouch cloth while bookplates glide down the case front and park, and the mail hook swaying low on its ring in front, catching nothing">
+<rect width="900" height="300" fill="#1a2a40"/>
+<rect x="0" y="0" width="900" height="86" fill="#24344c"/>
+<rect x="30" y="58" width="840" height="10" fill="#6b4f2c"/>
+<g fill="#3a3a40" stroke="#101014" stroke-width="1">
+<g><rect x="60" y="44" width="34" height="14" rx="2"/><animateTransform attributeName="transform" type="translate" values="0 0; 120 0; 240 0" dur="18s" repeatCount="indefinite"/></g>
+<g><rect x="150" y="44" width="34" height="14" rx="2"/><animateTransform attributeName="transform" type="translate" values="0 0; 110 0; 230 0" dur="21s" repeatCount="indefinite"/></g>
+<g><rect x="250" y="44" width="34" height="14" rx="2"/><animateTransform attributeName="transform" type="translate" values="0 0; 100 0; 210 0" dur="24s" repeatCount="indefinite"/></g>
+<g><rect x="360" y="44" width="34" height="14" rx="2"/><animateTransform attributeName="transform" type="translate" values="0 0; 120 0; 220 0" dur="19s" repeatCount="indefinite"/></g>
+<g><rect x="470" y="44" width="34" height="14" rx="2"/><animateTransform attributeName="transform" type="translate" values="0 0; 105 0; 205 0" dur="22s" repeatCount="indefinite"/></g></g>
+<rect x="0" y="86" width="900" height="128" fill="#2e4a6b"/>
+<rect x="70" y="104" width="300" height="96" fill="#8a6b42"/>
+<g stroke="#6b4f2c" stroke-width="3"><line x1="120" y1="104" x2="120" y2="200"/><line x1="170" y1="104" x2="170" y2="200"/><line x1="220" y1="104" x2="220" y2="200"/><line x1="270" y1="104" x2="270" y2="200"/><line x1="320" y1="104" x2="320" y2="200"/><line x1="70" y1="136" x2="370" y2="136"/><line x1="70" y1="168" x2="370" y2="168"/></g>
+<g fill="#ece4cf" stroke="#2e4a6b" stroke-width="1">
+<g><rect x="82" y="108" width="26" height="34"/><animateTransform attributeName="transform" type="translate" values="0 0; 0 52" dur="7s" begin="0s" fill="freeze"/><animate attributeName="opacity" values="1; 1" dur="7s" repeatCount="indefinite"/></g>
+<g><rect x="132" y="108" width="26" height="34"/><animateTransform attributeName="transform" type="translate" values="0 0; 0 52" dur="7s" begin="2.2s" fill="freeze"/></g>
+<g><rect x="182" y="108" width="26" height="34"/><animateTransform attributeName="transform" type="translate" values="0 0; 0 52" dur="7s" begin="4.4s" fill="freeze"/></g></g>
+<polygon points="470,120 640,120 628,214 482,214" fill="#a8946c"/>
+<g fill="none" stroke="#78643e" stroke-width="2">
+<circle cx="520" cy="150" r="13" opacity="0"><animate attributeName="opacity" values="0; 0; 1; 1" keyTimes="0; 0.18; 0.22; 1" dur="6s" repeatCount="indefinite"/></circle>
+<circle cx="566" cy="168" r="13" opacity="0"><animate attributeName="opacity" values="0; 0; 1; 1" keyTimes="0; 0.48; 0.52; 1" dur="6s" repeatCount="indefinite"/></circle>
+<circle cx="516" cy="192" r="13" opacity="0"><animate attributeName="opacity" values="0; 0; 1; 1" keyTimes="0; 0.78; 0.82; 1" dur="6s" repeatCount="indefinite"/></circle></g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 -34; 0 0; 0 -34; 0 -34" keyTimes="0; 0.16; 0.3; 1" dur="6s" repeatCount="indefinite"/>
+<rect x="508" y="104" width="10" height="30" fill="#16161a"/><rect x="500" y="96" width="26" height="10" fill="#8a6b42"/><ellipse cx="513" cy="140" rx="17" ry="6" fill="#222228"/></g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 -34; 0 -34; 0 0; 0 -34; 0 -34" keyTimes="0; 0.44; 0.5; 0.62; 1" dur="6s" repeatCount="indefinite"/>
+<rect x="554" y="122" width="10" height="30" fill="#16161a"/><rect x="546" y="114" width="26" height="10" fill="#8a6b42"/><ellipse cx="559" cy="158" rx="17" ry="6" fill="#222228"/></g>
+<rect x="0" y="214" width="900" height="86" fill="#141c28"/>
+<g>
+<animateTransform attributeName="transform" type="rotate" values="0 450 218; 4 450 218; 0 450 218; -4 450 218; 0 450 218" dur="9s" repeatCount="indefinite"/>
+<ellipse cx="450" cy="226" rx="15" ry="11" fill="none" stroke="#8a6b42" stroke-width="6"/>
+<path d="M450 234 V282 A30 30 0 0 0 510 282" fill="none" stroke="#33506e" stroke-width="11" stroke-linecap="round"/>
+<path d="M456 240 V280 A24 24 0 0 0 502 278" fill="none" stroke="#f5f2ea" stroke-width="2.5"/></g>
+</svg>
