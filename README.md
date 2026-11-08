@@ -18,12 +18,12 @@ Identifies and removes subtle correlations between seemingly unrelated data poin
 ![Major separator](sep-heavy.svg)
 
 ## Install
-`git clone https://github.com/ShadowGuardAI/dm-data-correlation-breaker`
+`git clone https://github.com/ShadowGuard-AI/dm-data-correlation-breaker`
 
 ![Minor separator](sep-light.svg)
 
 ## Usage
-`./dm-data-correlation-breaker [params]`
+`python3 main.py [options]`
 
 > Bench notice: outgoing never equals incoming, however spelled. If the resolved output path is the input file, by the same spelling, a `./` alias, or a symlink, the run refuses at exit 1 before anything is written and the input is left untouched.
 
@@ -51,7 +51,7 @@ Identifies and removes subtle correlations between seemingly unrelated data poin
 ![Minor separator](sep-light.svg)
 
 ## License
-Copyright (c) ShadowGuardAI
+This project is released under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ![Major separator](sep-heavy.svg)
 
